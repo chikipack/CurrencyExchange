@@ -7,65 +7,67 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 
 import com.chikipack.currencyexchange.logic.Exchange;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 public class principal {
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         int salir = 1;
 
         Service service = new Service();
-        Gson gson = new Gson();
-
-//
 
         while(salir != 0) {
             System.out.println("***********************");
             System.out.println("Bienvenido al conversor de moneda");
             System.out.println("Selecciona un tipo de cambio ");
-            System.out.println("1) Dolar(USD) -> ");
+            System.out.println("1) Dolar(USD) -> Peso Mexicano(MXN)");
             System.out.println("2) Peso Mexicano(MXN) -> Dolar(USD)");
             System.out.println("3) Dolar(USD) -> Peso Chileno(CLP)");
             System.out.println("4) Peso Chileno(CLP) -> Dolar(USD)");
             System.out.println("5) Dolar(USD) -> Yen Japones(JPY)");
             System.out.println("6) Yen Japones (JPY) -> Dolar(USD)");
             int option = userInput.nextInt();
-            String from = "";
-            String to = "";
-            Double convertir;
-
-            Exchange x = new Exchange();
+            double cantidadAConvertir;
+            double conversionRate;
+            Exchange exchange = new Exchange();
 
             switch (option){
                 case 0:
                     salir = 0;
                     break;
                 case 1:
-                    from = "USD";
-                    to = "MXN";
                     System.out.println("Cuanto quieres convertir");
-                    convertir = userInput.nextDouble();
-                    try {
-                        double response = service.sendGetRequest(from, to);
-//                        System.out.println("Response from API: " + response);
-                        System.out.println(x.transform(convertir, response));
-                    } catch (InterruptedException | IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Error during API request");
-                    }
+                    cantidadAConvertir = userInput.nextDouble();
+                    conversionRate = exchange.getConversionRate("USD", "MXN");
+                    System.out.println(cantidadAConvertir +" USD son: "+ String.format("%.2f", exchange.transform(cantidadAConvertir, conversionRate)) +" MXN");
                     break;
                 case 2:
-                    from = "MXN";
-                    to = "USD";
-
-                    try {
-                        double response = service.sendGetRequest(from, to);
-                        System.out.println("Response from API: " + response);
-                    } catch (InterruptedException | IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Error during API request");
-                    }
+                    System.out.println("Cuanto quieres convertir");
+                    cantidadAConvertir = userInput.nextDouble();
+                    conversionRate = exchange.getConversionRate("MXN", "USD");
+                    System.out.println(cantidadAConvertir +" MXN son: "+ String.format("%.2f", exchange.transform(cantidadAConvertir, conversionRate))+" USD");
+                    break;
+                case 3:
+                    System.out.println("Cuanto quieres convertir");
+                    cantidadAConvertir = userInput.nextDouble();
+                    conversionRate = exchange.getConversionRate("USD", "CLP");
+                    System.out.println(cantidadAConvertir +" USD son: "+ String.format("%.2f", exchange.transform(cantidadAConvertir, conversionRate))+" CLP");
+                    break;
+                case 4:
+                    System.out.println("Cuanto quieres convertir");
+                    cantidadAConvertir = userInput.nextDouble();
+                    conversionRate = exchange.getConversionRate("CLP", "USD");
+                    System.out.println(cantidadAConvertir +" CLP son: "+ String.format("%.2f", exchange.transform(cantidadAConvertir, conversionRate))+" USD");
+                    break;
+                case 5:
+                    System.out.println("Cuanto quieres convertir");
+                    cantidadAConvertir = userInput.nextDouble();
+                    conversionRate = exchange.getConversionRate("USD", "JPY");
+                    System.out.println(cantidadAConvertir +" USD son: "+ String.format("%.2f", exchange.transform(cantidadAConvertir, conversionRate))+" JPY");
+                    break;
+                case 6:
+                    System.out.println("Cuanto quieres convertir");
+                    cantidadAConvertir = userInput.nextDouble();
+                    conversionRate = exchange.getConversionRate("JPY", "USD");
+                    System.out.println(cantidadAConvertir +" JPY son: "+ String.format("%.2f", exchange.transform(cantidadAConvertir, conversionRate))+" USD");
                     break;
                 default:
                     System.out.println("Opcion no valida");

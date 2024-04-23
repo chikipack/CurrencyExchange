@@ -29,7 +29,6 @@ public class Service {
 
         if (response.statusCode() == 200) {
             CurrencyDTO currency = gson.fromJson(response.body(), CurrencyDTO.class);
-            System.out.println(currency);
             return currency.conversion_rate();
         } else {
             throw new RuntimeException("Failed : HTTP error code : " + response.statusCode());
