@@ -18,6 +18,7 @@ public class principal {
             System.out.println("***********************");
             System.out.println("Bienvenido al conversor de moneda");
             System.out.println("Selecciona un tipo de cambio ");
+            System.out.println("0) Salir");
             System.out.println("1) Dolar(USD) -> Peso Mexicano(MXN)");
             System.out.println("2) Peso Mexicano(MXN) -> Dolar(USD)");
             System.out.println("3) Dolar(USD) -> Peso Chileno(CLP)");
